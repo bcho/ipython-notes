@@ -1,0 +1,9 @@
+Customize notebook settings.
+----------------------------
+
+## TODO
+
+- [x] use git submodule to import the latest marked
+- [??] add a custom.css to override the `list-style`
+- [??] handle click event
+- [??] open source this profile
