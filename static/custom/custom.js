@@ -4,25 +4,32 @@ var patchMarked = function (marked) {
     // Add `todo list` support to listitem
     // e.g.:
     //  
-    //  - [??] fix this link
-    //  - [??] read some books
+    //  - [?] fix this link
+    //  - [x] read some books
     //
     // should be rendered into:
     //
     //  <ul>
     //      <li class="todo-item"><input type="checkbox" />fix this link</li>
-    //      <li class="todo-item"><input type="checkbox" />read some books</li>
+    //      <li class="todo-item"><input type="checkbox" checked />read some books</li>
     //  </ul>
     
     // Save original renderer.
     var renderListitem = renderer.listitem;
     renderer.listitem = function (text) {
-        var pattern = /\[\?\?\](.*)/,
-            matched = pattern.exec(text);
+        var pattern = /\[([\?xX])](.*)/,
+            matched = pattern.exec(text),
+            status;
 
-        if (matched && matched.length === 2) {
-            return '<li class="todo-item"><input type="checkbox" />'
-                + matched[1]
+        if (matched) {
+            status = matched[1].toLowerCase();
+            if (status === 'x') {
+                status = '<input type="checkbox" checked />';
+            } else if (status === '?') {
+                status = '<input type="checkbox" />';
+            }
+            return '<li class="todo-item">'
+                + status + matched[2]
                 + '</li>';
         }
 
