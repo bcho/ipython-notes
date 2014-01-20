@@ -41,12 +41,10 @@ var patchMarked = function (marked) {
     return marked;
 };
 
-$([IPython.events]).on('notebook_loaded.Notebook', function () {
-    // Since the using marked in IPython doesn't provide
-    // rendering overriding, so let's require a new one.
-    require(['custom/marked'], function (marked) {
-        // Don't forget to re-setup it.
-        marked.setOptions(window.marked.options);
-        window.marked = patchMarked(marked);
-    });
-})
+// Since the using marked in IPython doesn't provide
+// rendering overriding, so let's require a new one.
+require(['custom/marked'], function (marked) {
+    // Don't forget to re-setup it.
+    marked.setOptions(window.marked.options);
+    window.marked = patchMarked(marked);
+});
