@@ -24,9 +24,9 @@ var patchMarked = function (marked) {
         if (matched) {
             status = matched[1].toLowerCase();
             if (status === 'x') {
-                status = '<input type="checkbox" checked />';
+                status = '<input type="checkbox" checked disabled />';
             } else if (status === '?') {
-                status = '<input type="checkbox" />';
+                status = '<input type="checkbox" disabled />';
             }
             return '<li class="todo-item">'
                 + status + matched[2]
